@@ -1,0 +1,55 @@
+syntax  = "proto3";
+
+package contact;
+
+message Contact {
+    int32 id =1;
+    string first_name =2;
+    string last_name = 3;
+    string email = 4;
+}
+
+message CreateContactRequest{
+    int32 user_id =1;
+    string first_name =2;
+    string last_name = 3;
+    string email = 4;
+}
+
+message CreateContactResponse{
+    string message = 1;
+}
+
+message ContactListRespectiveUserRequest{}
+
+message ContactListRespectiveUserResponse{
+    repeated ContactWithUser contacts = 1;
+}
+
+message ContactListRequest{
+    int32 user_id =1;
+}
+message ContactListResponse {
+    repeated Contact contact =1;
+}
+
+message ContactWithUser{
+    int32 id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string email = 4;
+    User user = 5;
+}
+
+message User {
+    int32 id =1;
+    string firstName = 2;
+    string lastName = 3;
+    string email = 4;
+}
+
+service ContactService {
+    rpc CreateContact (CreateContactRequest) returns (CreateContactResponse){}
+    rpc GetContactListWithUser (ContactListRespectiveUserRequest) returns (ContactListRespectiveUserResponse){}
+    rpc GetContactList (ContactListRequest) returns (ContactListResponse){}
+}

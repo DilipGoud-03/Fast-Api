@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package user;
+
+message CreateUserRequest {
+    string first_name = 1;
+    string last_name = 2;
+    string email = 3;
+    string password = 4;
+}
+
+message CreateUserResponse {
+   string message = 1;
+}
+
+message ListUsersWithContactsRequest {}
+
+message ListUsersWithContactsResponse {
+    repeated UserWithContacts users = 1;
+}
+
+message UserByContactRequest{
+    int32 parent_id =1;
+}
+
+message UserByContactResponse{
+    User user =1;
+}
+
+message UserWithContacts {
+    int32 id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string email = 4;
+    repeated Contact contacts = 5;
+}
+
+message User {
+    int32 id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string email = 4;
+}
+
+message Contact {
+    int32 id = 1;
+    string firstName = 2;
+    string lastName = 3;
+    string email = 4;
+}
+
+service UserService {
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+    rpc ListUsersWithContacts (ListUsersWithContactsRequest) returns (ListUsersWithContactsResponse);
+    rpc GetUsers (UserByContactRequest) returns (UserByContactResponse);
+}
