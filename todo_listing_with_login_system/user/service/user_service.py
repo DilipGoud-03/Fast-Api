@@ -1,5 +1,5 @@
 import sys
-sys.path.append("/opt/lampp/htdocs/fast_api/todo_listing_with_auth")
+sys.path.append("/opt/lampp/htdocs/fast_api/todo_listing_with_login_system/")
 import pb.user_pb2_grpc as user_pb2_grpc
 import pb.user_pb2 as user_pb2
 from db.models import User
