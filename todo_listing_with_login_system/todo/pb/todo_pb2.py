@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\ntodo.proto\x12\x05todos\"3\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x10\n\x08userName\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\"A\n\x07\x43omment\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07\x63omment\x18\x02 \x01(\t\x12\x19\n\x04user\x18\x03 \x01(\x0b\x32\x0b.todos.User\"H\n\x11\x43reateTodoRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x05\x12\r\n\x05title\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\"%\n\x12\x43reateTodoResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"Y\n\x11UpdateTodoRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x05\x12\x0f\n\x07todo_id\x18\x02 \x01(\x05\x12\r\n\x05title\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\"%\n\x12UpdateTodoResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"5\n\x11\x44\x65leteTodoRequest\x12\x0f\n\x07todo_id\x18\x01 \x01(\x05\x12\x0f\n\x07user_id\x18\x02 \x01(\x05\"%\n\x12\x44\x65leteTodoResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"I\n\x14\x43reateCommentRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x05\x12\x0f\n\x07todo_id\x18\x02 \x01(\x05\x12\x0f\n\x07\x63omment\x18\x03 \x01(\t\"(\n\x15\x43reateCommentResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"2\n\x0eGetTodoRequest\x12\x14\n\x07todo_id\x18\x01 \x01(\x05H\x00\x88\x01\x01\x42\n\n\x08_todo_id\"w\n\x08GetTodos\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05title\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x19\n\x04user\x18\x04 \x01(\x0b\x32\x0b.todos.User\x12 \n\x08\x63omments\x18\x05 \x03(\x0b\x32\x0e.todos.Comment\"1\n\x0fGetTodoResponse\x12\x1e\n\x05todos\x18\x01 \x03(\x0b\x32\x0f.todos.GetTodos\"%\n\x12GetCommentsRequest\x12\x0f\n\x07todo_id\x18\x01 \x01(\x05\"7\n\x13GetCommentsResponse\x12 \n\x08\x63omments\x18\x01 \x03(\x0b\x32\x0e.todos.Comment2\xae\x03\n\x0bTodoService\x12\x43\n\nCreateTodo\x12\x18.todos.CreateTodoRequest\x1a\x19.todos.CreateTodoResponse\"\x00\x12:\n\x07GetTodo\x12\x15.todos.GetTodoRequest\x1a\x16.todos.GetTodoResponse\"\x00\x12\x43\n\nDeleteTodo\x12\x18.todos.DeleteTodoRequest\x1a\x19.todos.DeleteTodoResponse\"\x00\x12\x43\n\nUpdateTodo\x12\x18.todos.UpdateTodoRequest\x1a\x19.todos.UpdateTodoResponse\"\x00\x12L\n\rCreateComment\x12\x1b.todos.CreateCommentRequest\x1a\x1c.todos.CreateCommentResponse\"\x00\x12\x46\n\x0bGetComments\x12\x19.todos.GetCommentsRequest\x1a\x1a.todos.GetCommentsResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\ntodo.proto\x12\x05todos\"3\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x10\n\x08userName\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\"A\n\x07\x43omment\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07\x63omment\x18\x02 \x01(\t\x12\x19\n\x04user\x18\x03 \x01(\x0b\x32\x0b.todos.User\"H\n\x11\x43reateTodoRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x05\x12\r\n\x05title\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\"%\n\x12\x43reateTodoResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"Y\n\x11UpdateTodoRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x05\x12\x0f\n\x07todo_id\x18\x02 \x01(\x05\x12\r\n\x05title\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\"%\n\x12UpdateTodoResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"5\n\x11\x44\x65leteTodoRequest\x12\x0f\n\x07todo_id\x18\x01 \x01(\x05\x12\x0f\n\x07user_id\x18\x02 \x01(\x05\"%\n\x12\x44\x65leteTodoResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"I\n\x14\x43reateCommentRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x05\x12\x0f\n\x07todo_id\x18\x02 \x01(\x05\x12\x0f\n\x07\x63omment\x18\x03 \x01(\t\"(\n\x15\x43reateCommentResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"?\n\x0eGetTodoRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x05\x12\x12\n\x05title\x18\x02 \x01(\tH\x00\x88\x01\x01\x42\x08\n\x06_title\"w\n\x08GetTodos\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05title\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x19\n\x04user\x18\x04 \x01(\x0b\x32\x0b.todos.User\x12 \n\x08\x63omments\x18\x05 \x03(\x0b\x32\x0e.todos.Comment\"1\n\x0fGetTodoResponse\x12\x1e\n\x05todos\x18\x01 \x03(\x0b\x32\x0f.todos.GetTodos\"6\n\x12GetTodoByIdRequest\x12\x0f\n\x07todo_id\x18\x01 \x01(\x05\x12\x0f\n\x07user_id\x18\x02 \x01(\x05\"%\n\x12GetCommentsRequest\x12\x0f\n\x07todo_id\x18\x01 \x01(\x05\"7\n\x13GetCommentsResponse\x12 \n\x08\x63omments\x18\x01 \x03(\x0b\x32\x0e.todos.Comment2\xf2\x03\n\x0bTodoService\x12\x43\n\nCreateTodo\x12\x18.todos.CreateTodoRequest\x1a\x19.todos.CreateTodoResponse\"\x00\x12:\n\x07GetTodo\x12\x15.todos.GetTodoRequest\x1a\x16.todos.GetTodoResponse\"\x00\x12\x43\n\nDeleteTodo\x12\x18.todos.DeleteTodoRequest\x1a\x19.todos.DeleteTodoResponse\"\x00\x12\x43\n\nUpdateTodo\x12\x18.todos.UpdateTodoRequest\x1a\x19.todos.UpdateTodoResponse\"\x00\x12\x42\n\x0bGetTodoById\x12\x19.todos.GetTodoByIdRequest\x1a\x16.todos.GetTodoResponse\"\x00\x12L\n\rCreateComment\x12\x1b.todos.CreateCommentRequest\x1a\x1c.todos.CreateCommentResponse\"\x00\x12\x46\n\x0bGetComments\x12\x19.todos.GetCommentsRequest\x1a\x1a.todos.GetCommentsResponse\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -42,15 +42,17 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_CREATECOMMENTRESPONSE']._serialized_start=553
   _globals['_CREATECOMMENTRESPONSE']._serialized_end=593
   _globals['_GETTODOREQUEST']._serialized_start=595
-  _globals['_GETTODOREQUEST']._serialized_end=645
-  _globals['_GETTODOS']._serialized_start=647
-  _globals['_GETTODOS']._serialized_end=766
-  _globals['_GETTODORESPONSE']._serialized_start=768
-  _globals['_GETTODORESPONSE']._serialized_end=817
-  _globals['_GETCOMMENTSREQUEST']._serialized_start=819
-  _globals['_GETCOMMENTSREQUEST']._serialized_end=856
-  _globals['_GETCOMMENTSRESPONSE']._serialized_start=858
-  _globals['_GETCOMMENTSRESPONSE']._serialized_end=913
-  _globals['_TODOSERVICE']._serialized_start=916
-  _globals['_TODOSERVICE']._serialized_end=1346
+  _globals['_GETTODOREQUEST']._serialized_end=658
+  _globals['_GETTODOS']._serialized_start=660
+  _globals['_GETTODOS']._serialized_end=779
+  _globals['_GETTODORESPONSE']._serialized_start=781
+  _globals['_GETTODORESPONSE']._serialized_end=830
+  _globals['_GETTODOBYIDREQUEST']._serialized_start=832
+  _globals['_GETTODOBYIDREQUEST']._serialized_end=886
+  _globals['_GETCOMMENTSREQUEST']._serialized_start=888
+  _globals['_GETCOMMENTSREQUEST']._serialized_end=925
+  _globals['_GETCOMMENTSRESPONSE']._serialized_start=927
+  _globals['_GETCOMMENTSRESPONSE']._serialized_end=982
+  _globals['_TODOSERVICE']._serialized_start=985
+  _globals['_TODOSERVICE']._serialized_end=1483
 # @@protoc_insertion_point(module_scope)

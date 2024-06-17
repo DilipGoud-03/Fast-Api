@@ -49,6 +49,11 @@ class UserServiceStub(object):
                 request_serializer=user__pb2.GetUserRequest.SerializeToString,
                 response_deserializer=user__pb2.GetUserResponse.FromString,
                 _registered_method=True)
+        self.GetUserByEmail = channel.unary_unary(
+                '/user.UserService/GetUserByEmail',
+                request_serializer=user__pb2.GetUserByEmailRequest.SerializeToString,
+                response_deserializer=user__pb2.GetUserResponse.FromString,
+                _registered_method=True)
         self.LoginUser = channel.unary_unary(
                 '/user.UserService/LoginUser',
                 request_serializer=user__pb2.LoginUserRequest.SerializeToString,
@@ -71,6 +76,12 @@ class UserServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetUserByEmail(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def LoginUser(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -88,6 +99,11 @@ def add_UserServiceServicer_to_server(servicer, server):
             'GetUser': grpc.unary_unary_rpc_method_handler(
                     servicer.GetUser,
                     request_deserializer=user__pb2.GetUserRequest.FromString,
+                    response_serializer=user__pb2.GetUserResponse.SerializeToString,
+            ),
+            'GetUserByEmail': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUserByEmail,
+                    request_deserializer=user__pb2.GetUserByEmailRequest.FromString,
                     response_serializer=user__pb2.GetUserResponse.SerializeToString,
             ),
             'LoginUser': grpc.unary_unary_rpc_method_handler(
@@ -149,6 +165,33 @@ class UserService(object):
             target,
             '/user.UserService/GetUser',
             user__pb2.GetUserRequest.SerializeToString,
+            user__pb2.GetUserResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetUserByEmail(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/user.UserService/GetUserByEmail',
+            user__pb2.GetUserByEmailRequest.SerializeToString,
             user__pb2.GetUserResponse.FromString,
             options,
             channel_credentials,

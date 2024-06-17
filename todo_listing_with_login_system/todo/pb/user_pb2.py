@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nuser.proto\x12\x04user\"F\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x11\n\tuser_name\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08password\x18\x04 \x01(\t\"I\n\x13RegisterUserRequest\x12\x11\n\tuser_name\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x10\n\x08password\x18\x03 \x01(\t\"\'\n\x14RegisterUserResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"#\n\x0eGetUserRequest\x12\x11\n\tparent_id\x18\x01 \x01(\x05\"+\n\x0fGetUserResponse\x12\x18\n\x04user\x18\x01 \x01(\x0b\x32\n.user.User\"7\n\x10LoginUserRequest\x12\x11\n\tuser_name\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\")\n\x11LoginUserResponse\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x01 \x01(\t2\xd0\x01\n\x0bUserService\x12G\n\x0cRegisterUser\x12\x19.user.RegisterUserRequest\x1a\x1a.user.RegisterUserResponse\"\x00\x12\x38\n\x07GetUser\x12\x14.user.GetUserRequest\x1a\x15.user.GetUserResponse\"\x00\x12>\n\tLoginUser\x12\x16.user.LoginUserRequest\x1a\x17.user.LoginUserResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nuser.proto\x12\x04user\"F\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x11\n\tuser_name\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08password\x18\x04 \x01(\t\"I\n\x13RegisterUserRequest\x12\x11\n\tuser_name\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x10\n\x08password\x18\x03 \x01(\t\"\'\n\x14RegisterUserResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"#\n\x0eGetUserRequest\x12\x11\n\tparent_id\x18\x01 \x01(\x05\"&\n\x15GetUserByEmailRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"+\n\x0fGetUserResponse\x12\x18\n\x04user\x18\x01 \x01(\x0b\x32\n.user.User\"7\n\x10LoginUserRequest\x12\x11\n\tuser_name\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\")\n\x11LoginUserResponse\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x01 \x01(\t2\x98\x02\n\x0bUserService\x12G\n\x0cRegisterUser\x12\x19.user.RegisterUserRequest\x1a\x1a.user.RegisterUserResponse\"\x00\x12\x38\n\x07GetUser\x12\x14.user.GetUserRequest\x1a\x15.user.GetUserResponse\"\x00\x12\x46\n\x0eGetUserByEmail\x12\x1b.user.GetUserByEmailRequest\x1a\x15.user.GetUserResponse\"\x00\x12>\n\tLoginUser\x12\x16.user.LoginUserRequest\x1a\x17.user.LoginUserResponse\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -29,12 +29,14 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_REGISTERUSERRESPONSE']._serialized_end=206
   _globals['_GETUSERREQUEST']._serialized_start=208
   _globals['_GETUSERREQUEST']._serialized_end=243
-  _globals['_GETUSERRESPONSE']._serialized_start=245
-  _globals['_GETUSERRESPONSE']._serialized_end=288
-  _globals['_LOGINUSERREQUEST']._serialized_start=290
-  _globals['_LOGINUSERREQUEST']._serialized_end=345
-  _globals['_LOGINUSERRESPONSE']._serialized_start=347
-  _globals['_LOGINUSERRESPONSE']._serialized_end=388
-  _globals['_USERSERVICE']._serialized_start=391
-  _globals['_USERSERVICE']._serialized_end=599
+  _globals['_GETUSERBYEMAILREQUEST']._serialized_start=245
+  _globals['_GETUSERBYEMAILREQUEST']._serialized_end=283
+  _globals['_GETUSERRESPONSE']._serialized_start=285
+  _globals['_GETUSERRESPONSE']._serialized_end=328
+  _globals['_LOGINUSERREQUEST']._serialized_start=330
+  _globals['_LOGINUSERREQUEST']._serialized_end=385
+  _globals['_LOGINUSERRESPONSE']._serialized_start=387
+  _globals['_LOGINUSERRESPONSE']._serialized_end=428
+  _globals['_USERSERVICE']._serialized_start=431
+  _globals['_USERSERVICE']._serialized_end=711
 # @@protoc_insertion_point(module_scope)

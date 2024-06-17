@@ -22,6 +22,10 @@ message GetUserRequest{
     int32 parent_id = 1;
 }
 
+message GetUserByEmailRequest{
+    string email = 1;
+}
+
 message GetUserResponse {
     User user = 1;
 }
@@ -38,6 +42,7 @@ message LoginUserResponse{
 service UserService{
     rpc RegisterUser (RegisterUserRequest) returns (RegisterUserResponse) {}
     rpc GetUser (GetUserRequest) returns (GetUserResponse) {}
+    rpc GetUserByEmail (GetUserByEmailRequest) returns (GetUserResponse) {}
     rpc LoginUser (LoginUserRequest) returns (LoginUserResponse) {}
 }
 

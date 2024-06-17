@@ -21,21 +21,32 @@ class TodoClient(object):
 
         except grpc.RpcError as rpc_error:
             grpc_status_code = rpc_error.code()
-            print(grpc_status_code)
             http_status_code = grpc_to_http_status.get(grpc_status_code)
             raise HTTPException(status_code=http_status_code, detail=rpc_error.details())
 
     # Get Todo items
-    def get_todos(self,todo_id):
+    def get_todos(self,user_id,title):
         try :
-            responses  = self.stub.GetTodo(todo_pb2.GetTodoRequest(todo_id=todo_id))
+            responses  = self.stub.GetTodo(todo_pb2.GetTodoRequest(user_id=user_id,title=title))
             return MessageToDict(
                 responses,
                 always_print_fields_with_no_presence=True
             )
         except grpc.RpcError as rpc_error :
             grpc_status_code = rpc_error.code()
-            print(grpc_status_code)
+            http_status_code = grpc_to_http_status.get(grpc_status_code)
+            raise HTTPException(status_code=http_status_code, detail=rpc_error.details())
+    
+    # Get Todo by their Id 
+    def get_todo(self,todo_id,user_id):
+        try :
+            responses  = self.stub.GetTodoById(todo_pb2.GetTodoByIdRequest(todo_id=todo_id,user_id=user_id))
+            return MessageToDict(
+                responses,
+                always_print_fields_with_no_presence=True
+            )
+        except grpc.RpcError as rpc_error :
+            grpc_status_code = rpc_error.code()
             http_status_code = grpc_to_http_status.get(grpc_status_code)
             raise HTTPException(status_code=http_status_code, detail=rpc_error.details())
     
@@ -48,7 +59,6 @@ class TodoClient(object):
             )
         except grpc.RpcError as rpc_error :
             grpc_status_code = rpc_error.code()
-            print(grpc_status_code)
             http_status_code = grpc_to_http_status.get(grpc_status_code)
             raise HTTPException(status_code=http_status_code, detail=rpc_error.details())
         
@@ -61,7 +71,6 @@ class TodoClient(object):
             )
         except grpc.RpcError as rpc_error :
             grpc_status_code = rpc_error.code()
-            print(grpc_status_code)
             http_status_code = grpc_to_http_status.get(grpc_status_code)
             raise HTTPException(status_code=http_status_code, detail=rpc_error.details())
     
@@ -74,7 +83,6 @@ class TodoClient(object):
             )
         except grpc.RpcError as rpc_error :
             grpc_status_code = rpc_error.code()
-            print(grpc_status_code)
             http_status_code = grpc_to_http_status.get(grpc_status_code)
             raise HTTPException(status_code=http_status_code, detail=rpc_error.details())
             

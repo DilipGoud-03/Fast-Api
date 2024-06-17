@@ -21,10 +21,10 @@ class UserClient(object):
         
         except grpc.RpcError as rpc_error:
             grpc_status_code = rpc_error.code()
-            print(grpc_status_code)
             http_status_code = grpc_to_http_status.get(grpc_status_code)
             raise HTTPException(status_code=http_status_code, detail=rpc_error.details())
 
+    # Login user 
     def login(self,user):
         try :
             response = self.stub.LoginUser(user_pb2.LoginUserRequest(user_name = user.username,password = user.password))            
@@ -32,6 +32,10 @@ class UserClient(object):
 
         except grpc.RpcError as rpc_error:
             grpc_status_code = rpc_error.code()
-            print(grpc_status_code)
             http_status_code = grpc_to_http_status.get(grpc_status_code)
             raise HTTPException(status_code=http_status_code, detail=rpc_error.details())
+    
+    # Get user by thier email 
+    def get_user_by_email(self,email) :
+        response = self.stub.GetUserByEmail(user_pb2.GetUserByEmailRequest(email=email))
+        return response

@@ -59,6 +59,11 @@ class TodoServiceStub(object):
                 request_serializer=todo__pb2.UpdateTodoRequest.SerializeToString,
                 response_deserializer=todo__pb2.UpdateTodoResponse.FromString,
                 _registered_method=True)
+        self.GetTodoById = channel.unary_unary(
+                '/todos.TodoService/GetTodoById',
+                request_serializer=todo__pb2.GetTodoByIdRequest.SerializeToString,
+                response_deserializer=todo__pb2.GetTodoResponse.FromString,
+                _registered_method=True)
         self.CreateComment = channel.unary_unary(
                 '/todos.TodoService/CreateComment',
                 request_serializer=todo__pb2.CreateCommentRequest.SerializeToString,
@@ -98,6 +103,12 @@ class TodoServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetTodoById(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def CreateComment(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -132,6 +143,11 @@ def add_TodoServiceServicer_to_server(servicer, server):
                     servicer.UpdateTodo,
                     request_deserializer=todo__pb2.UpdateTodoRequest.FromString,
                     response_serializer=todo__pb2.UpdateTodoResponse.SerializeToString,
+            ),
+            'GetTodoById': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetTodoById,
+                    request_deserializer=todo__pb2.GetTodoByIdRequest.FromString,
+                    response_serializer=todo__pb2.GetTodoResponse.SerializeToString,
             ),
             'CreateComment': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateComment,
@@ -252,6 +268,33 @@ class TodoService(object):
             '/todos.TodoService/UpdateTodo',
             todo__pb2.UpdateTodoRequest.SerializeToString,
             todo__pb2.UpdateTodoResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetTodoById(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/todos.TodoService/GetTodoById',
+            todo__pb2.GetTodoByIdRequest.SerializeToString,
+            todo__pb2.GetTodoResponse.FromString,
             options,
             channel_credentials,
             insecure,

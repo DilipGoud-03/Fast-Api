@@ -5,8 +5,8 @@ from .db import Base,engine
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True,autoincrement=True)
-    user_name = Column(String(255),)
-    email = Column(String(255), unique=True, index=True)
+    user_name = Column(String(255),unique=True)
+    email = Column(String(255), index=True)
     password = Column(String(255))
     todos = relationship("Todo", back_populates="parent")
     comments = relationship("Comment", back_populates="parent")
@@ -18,7 +18,7 @@ class Todo(Base):
     title = Column(String(255),nullable=False)
     description = Column(Text(255),nullable=False)
     parent = relationship("User", back_populates="todos")
-    comments = relationship("Comment", back_populates="todo")
+    comments = relationship("Comment", back_populates="todo",cascade="all,delete")
 
 class Comment(Base):
     __tablename__ = "comments"

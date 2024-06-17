@@ -1,4 +1,4 @@
-from fastapi import APIRouter,Query,Depends
+from fastapi import APIRouter,Query,Depends,Path
 from ..db import schemas
 from typing import Optional
 from api.dependencies.grpc.todo import TodoClient
@@ -16,8 +16,15 @@ def create_todo(todo : schemas.CreateTodo,owner: User = Depends(get_current_user
 
 # Get all todos
 @router.get("/todos",status_code=200)
-def get_todos (todo_id :Optional[int] = Query(None, description="Sort by Todo id")):
-    response = todo_client.get_todos(todo_id=todo_id)
+def get_todos (title :Optional[str] = Query(None, description="Filter by title"),owner: User = Depends(get_current_user)):
+    response = todo_client.get_todos(user_id = owner.id,title = title)
+    result = response["todos"]
+    return result
+
+# Get todo by their id 
+@router.get("/todo/{todo_id}",status_code=200)
+def get_todo(todo_id :int ,owner: User = Depends(get_current_user)):
+    response = todo_client.get_todo(todo_id=todo_id,user_id = owner.id)
     result = response["todos"]
     return result
 
@@ -28,7 +35,7 @@ def update_todo(todo_id : int,todo : schemas.UpdateTodo,owner: User = Depends(ge
     return response
 
 # Delete Todo
-@router.delete("/todo/{todo_id}",status_code=201)
+@router.delete("/todo/{todo_id}",status_code=204)
 def delete_todo(todo_id : int,owner: User = Depends(get_current_user)) :
     response = todo_client.delete_todo(user_id=owner.id,todo_id=todo_id)
     return response

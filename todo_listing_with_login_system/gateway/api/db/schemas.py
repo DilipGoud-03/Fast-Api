@@ -3,12 +3,14 @@ from typing import Union
 
 # Todo base class
 class TodoBase(BaseModel):
-    title :Union[str] = Field(default="",min_length=3 ,max_length=20)
-    description : Union[str] = Field(default="",min_length=10 ,max_length=100)
+    title :Union[str] = Field(default=None , min_length= 4 ,max_length=20)
+    description : str
 
 # Create new todo 
 class CreateTodo(TodoBase) :
     pass
+    class Config : 
+        orm_mode = True
 
 # Update todo 
 class UpdateTodo (TodoBase) :
@@ -21,6 +23,9 @@ class CommentBase(BaseModel):
 # Create new Commnet to todo
 class CreateComment(CommentBase) :
     pass
+
+    class Config : 
+        orm_mode = True   
 
 # User
 class TokenSchema(BaseModel):
@@ -37,6 +42,8 @@ class UserBase(BaseModel):
 
 class RegisterUser(UserBase):
     pass
+    class Config : 
+        orm_mode = True
 
 class UserOut(BaseModel):
     id: int
@@ -44,4 +51,4 @@ class UserOut(BaseModel):
     email: EmailStr
 
 class SystemUser(UserOut):
-    password: str
+    pass
