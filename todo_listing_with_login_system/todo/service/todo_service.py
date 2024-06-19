@@ -5,16 +5,16 @@ from grpc_interceptor.exceptions import GrpcException
 from db import models
 from db.db import SessionLocal
 from comment_client import CommnetsClient
-from pydantic import ValidationError
 from user_client import UserClient
-from db.schemas import todo_schema,comment_schema
+from pydantic import ValidationError
+from db.schemas import CreateTodo,CreateComment
 
-def grpc_message_to_dict(message):
-    return {field.name: getattr(message, field.name) for field in message.DESCRIPTOR.fields}
+
 class TodoBaseService(todo_pb2_grpc.TodoServiceServicer):
 
     # Create new toto by
     def CreateTodo(self, request, context):
+        todo_data = CreateTodo(**request.dict())
         db = SessionLocal()
         todo = db.query(models.Todo).filter(models.Todo.title == request.title,models.Todo.user_id == request.user_id).first()
         if todo :
@@ -23,8 +23,7 @@ class TodoBaseService(todo_pb2_grpc.TodoServiceServicer):
                 status_code=StatusCode.ALREADY_EXISTS,
             )
         else :
-            request_dict = grpc_message_to_dict(request)
-            new_todo = todo_schema.load(request_dict , session=db)
+            new_todo = models.Todo(**todo_data.dict())
             db.add(new_todo)
             db.commit()
             return todo_pb2.CreateTodoResponse(message = "New Todo created successfuly")
@@ -91,7 +90,10 @@ class TodoBaseService(todo_pb2_grpc.TodoServiceServicer):
         user_client = UserClient()
         commnet_client = CommnetsClient()
         db = SessionLocal()
-        todo = db.query(models.Todo).filter(models.Todo.id == request.todo_id,models.Todo.user_id == request.user_id).first()
+        todo = db.query(models.Todo).filter(
+            models.Todo.id == request.todo_id,
+            models.Todo.user_id == request.user_id
+        ).first()
             
         if not todo:
             raise GrpcException(
@@ -137,11 +139,16 @@ class TodoBaseService(todo_pb2_grpc.TodoServiceServicer):
 
     # Create comment on any todo
     def CreateComment(self, request, context):
+        
+        comment_data = CreateComment(
+            user_id=request.user_id,
+            todo_id=request.todo_id,
+            comment=request.comment,
+        )
         db = SessionLocal()
         check_todo = db.query(models.Todo).filter(models.Todo.id == request.todo_id).first()
         if check_todo :
-            request_dict = grpc_message_to_dict(request)
-            new_comment = comment_schema.load(request_dict , session=db)
+            new_comment = models.Comment(**comment_data.dict())
             db.add(new_comment)
             db.commit()
             return todo_pb2.CreateTodoResponse(message = "Comment created successfuly")

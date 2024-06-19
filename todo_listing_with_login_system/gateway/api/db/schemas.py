@@ -1,46 +1,31 @@
-from pydantic import BaseModel,EmailStr,Field,field_validator
+from pydantic import BaseModel,EmailStr,Field
 from typing import Union
 
 # Todo base class
 class TodoBase(BaseModel):
-    title :Union[str] = Field(default= '' , min_length= 4 ,max_length=20)
-    description : Union[str] = Field(default= '' , min_length= 10 ,max_length=50)
-
-    @field_validator("title","description")
-    def strip_whitespaces(cls, v: str) -> str:
-        return v.strip()
-
+    title :Union[str] = Field(default=None , min_length= 4 ,max_length=20)
+    description : str
 
 # Create new todo 
 class CreateTodo(TodoBase) :
     pass
     class Config : 
-        from_attributes = True
+        orm_mode = True
 
 # Update todo 
-class UpdateTodo (BaseModel) :
-    title : Union[str,None] = Field(default= '' )
-    description : Union[str,None] = Field(default= '')
-
-    @field_validator("title","description")
-    def strip_whitespaces(cls, v: str) -> str:
-        return v.strip()
-
+class UpdateTodo (TodoBase) :
+    pass
 
 # Comment Base class
 class CommentBase(BaseModel):
-    comment : Union[str] = Field(default= '',min_length=5 ,max_length=100)
-
-    @field_validator("comment")
-    def strip_whitespaces(cls, v: str) -> str:
-        return v.strip()
+    comment : Union[str] = Field(default="",min_length=5 ,max_length=100)
 
 # Create new Commnet to todo
 class CreateComment(CommentBase) :
     pass
 
     class Config : 
-        from_attributes = True   
+        orm_mode = True   
 
 # User
 class TokenSchema(BaseModel):
@@ -55,14 +40,10 @@ class UserBase(BaseModel):
     email: Union[EmailStr] = Field(description="user email")
     password: Union[str] = Field(min_length=5, max_length=24, description="user password")
 
-    @field_validator("user_name","email","password")
-    def strip_whitespaces(cls, v: str) -> str:
-        return v.strip()
-
 class RegisterUser(UserBase):
     pass
     class Config : 
-        from_attributes = True
+        orm_mode = True
 
 class UserOut(BaseModel):
     id: int
