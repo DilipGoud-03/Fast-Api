@@ -1,30 +1,21 @@
-from pydantic import BaseModel,EmailStr,Field
-from typing import Union
+from .models import Comment,Todo
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema ,auto_field
+class TodoSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Todo
+        load_instance = True 
+        include_relationships = True
+    user_id = auto_field()
 
-# Todo base class
-class TodoBase(BaseModel):
-    title :str
-    description : str
+todo_schema = TodoSchema()
 
-# Create new todo 
-class CreateTodo(TodoBase) :
-    user_id : int
-    pass
-    class Config : 
-        from_attributes = True
 
-# Update todo 
-class UpdateTodo (TodoBase) :
-    pass
+class CommnetSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Comment
+        load_instance = True
+        include_relationships = True
+    user_id = auto_field()
+    todo_id = auto_field()
 
-# Comment Base class
-class CommentBase(BaseModel):
-    comment : str
-
-# Create new Commnet to todo
-class CreateComment(CommentBase) :
-    user_id : int
-    todo_id : int
-    pass
-    class Config : 
-        from_attributes = True   
+comment_schema = CommnetSchema()
