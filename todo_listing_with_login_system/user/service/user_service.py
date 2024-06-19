@@ -5,7 +5,7 @@ from db.models import User
 from db.db import SessionLocal
 from .module import get_hashed_password,verify_password
 from db.schemas import user_schema
-from ...gateway.api.jwt.jwt import create_access_token
+from jwt_token.jwt import create_access_token
 
 def grpc_message_to_dict(message):
     return {field.name: getattr(message, field.name) for field in message.DESCRIPTOR.fields}
