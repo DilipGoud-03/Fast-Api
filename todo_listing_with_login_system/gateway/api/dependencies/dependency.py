@@ -1,25 +1,19 @@
 from datetime import datetime
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from sqlalchemy.orm import Session
-from ..db.db import SessionLocal
-from ..db.models import User
 from jose import jwt
 from pydantic import ValidationError
 from ..db.schemas import TokenPayload, SystemUser
+from .grpc.user import UserClient
 
 reuseable_oauth = OAuth2PasswordBearer(
     tokenUrl="/login",
     scheme_name="JWT"
 )
-def get_db() :
-    try :
-          db = SessionLocal()
-          return db
-    except :
-         db.close()
 
-async def get_current_user(token: str = Depends(reuseable_oauth),db : Session = Depends(get_db)):
+user_client = UserClient()
+
+async def get_current_user(token: str = Depends(reuseable_oauth)):
     try:
         secret = "JWT_SECRET_KEY"
         payload = jwt.decode(token, secret, algorithms=["HS256"])
@@ -37,8 +31,9 @@ async def get_current_user(token: str = Depends(reuseable_oauth),db : Session = 
             detail="Could not validate credentials",
             headers={"WWW-Authenticate": "Bearer"},
         )
-        
-    user = db.query(User).filter(User.email == token_data.sub).first()
+    
+    email =token_data.sub
+    user = user_client.get_user_by_email(email).user
     
     if user is None:
         raise HTTPException(
@@ -46,4 +41,4 @@ async def get_current_user(token: str = Depends(reuseable_oauth),db : Session = 
             detail="Could not find user",
         )
     else:
-        return SystemUser(id=user.id,user_name=user.user_name,email=user.email,password=user.password)
+        return SystemUser(id = user.id , user_name= user.user_name,email=user.email)

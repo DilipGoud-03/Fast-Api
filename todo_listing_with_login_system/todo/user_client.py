@@ -10,7 +10,6 @@ class UserClient(object):
 
     def get_user(self,parent_id):
         response = self.stub.GetUser(user_pb2.GetUserRequest(parent_id = parent_id))
-        print(response)
         return MessageToDict(
             response
         )
