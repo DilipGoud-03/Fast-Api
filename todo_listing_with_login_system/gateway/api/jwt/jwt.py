@@ -3,12 +3,12 @@ from typing import Union,Any
 from datetime import datetime ,timedelta
 
 def create_access_token(subject: Union[str, Any]) -> str:
-    expires_delta = datetime.now() + timedelta(minutes=1)
+    expires_delta = datetime.now() + timedelta(minutes=30)
     
     header = {  
         "alg": "HS256",  
-        "typ": "JWT"  
-        }  
+        "typ": "JWT" 
+        } 
 
     payload = {
         "sub": str(subject),
